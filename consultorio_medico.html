@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Vida Saúde</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            color: #333;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: #fff;
+            padding: 15px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a73e8;
+        }
+
+        .logo span { color: #333; }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav ul a {
+            text-decoration: none;
+            color: #555;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        nav ul a:hover { color: #1a73e8; }
+
+        .btn-agendar {
+            background: #1a73e8;
+            color: #fff !important;
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .btn-agendar:hover { background: #1558b0; color: #fff !important; }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #e8f4fd 0%, #f0f9ff 100%);
+            padding: 80px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-text h1 {
+            font-size: 46px;
+            color: #1a2e4a;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 span { color: #1a73e8; }
+
+        .hero-text p {
+            font-size: 17px;
+            color: #666;
+            max-width: 500px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons { display: flex; gap: 15px; }
+
+        .btn-primary {
+            background: #1a73e8;
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover { background: #1558b0; }
+
+        .btn-outline {
+            border: 2px solid #1a73e8;
+            color: #1a73e8;
+            padding: 14px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover { background: #1a73e8; color: #fff; }
+
+        .hero-image {
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            border-radius: 20px;
+            width: 420px;
+            height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 100px;
+        }
+
+        /* STATS */
+        .stats {
+            background: #1a73e8;
+            padding: 40px 60px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .stat h2 { font-size: 36px; color: #fff; font-weight: 700; }
+        .stat p { color: #c8e0ff; font-size: 14px; margin-top: 5px; }
+
+        /* ESPECIALIDADES */
+        .section { padding: 70px 60px; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 34px; color: #1a2e4a; margin-bottom: 10px; }
+        .section-title p { color: #888; font-size: 16px; }
+
+        .especialidades-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .especialidade-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .especialidade-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(26,115,232,0.15);
+        }
+
+        .especialidade-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .especialidade-card h3 { font-size: 16px; color: #1a2e4a; margin-bottom: 8px; }
+        .especialidade-card p { font-size: 13px; color: #888; line-height: 1.5; }
+
+        /* MÉDICOS */
+        .medicos { background: #f8fbff; }
+
+        .medicos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .medico-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            transition: transform 0.3s;
+        }
+
+        .medico-card:hover { transform: translateY(-5px); }
+
+        .medico-foto {
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+        }
+
+        .medico-info { padding: 20px; }
+        .medico-info h3 { font-size: 18px; color: #1a2e4a; margin-bottom: 5px; }
+        .medico-info .especialidade { color: #1a73e8; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+        .medico-info p { font-size: 13px; color: #888; line-height: 1.5; }
+
+        .medico-crm {
+            display: inline-block;
+            background: #e8f4fd;
+            color: #1a73e8;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        /* AGENDAMENTO */
+        .agendamento { background: #fff; }
+
+        .agendamento-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .agendamento-info h2 { font-size: 34px; color: #1a2e4a; margin-bottom: 15px; }
+        .agendamento-info p { color: #666; line-height: 1.7; margin-bottom: 25px; }
+
+        .beneficios { list-style: none; }
+        .beneficios li {
+            padding: 8px 0;
+            color: #555;
+            font-size: 15px;
+        }
+
+        .beneficios li::before {
+            content: "✓";
+            color: #1a73e8;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .form-agendamento {
+            background: #f8fbff;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+        }
+
+        .form-agendamento h3 { font-size: 22px; color: #1a2e4a; margin-bottom: 25px; }
+
+        .form-group { margin-bottom: 18px; }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #dde3f0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #333;
+            background: #fff;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+        .btn-submit {
+            width: 100%;
+            background: #1a73e8;
+            color: #fff;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 5px;
+        }
+
+        .btn-submit:hover { background: #1558b0; }
+
+        /* DEPOIMENTOS */
+        .depoimentos { background: #f8fbff; }
+
+        .depoimentos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .depoimento-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+        }
+
+        .estrelas { color: #f4b400; font-size: 18px; margin-bottom: 12px; }
+        .depoimento-card p { color: #666; font-size: 14px; line-height: 1.7; margin-bottom: 15px; }
+        .paciente { display: flex; align-items: center; gap: 12px; }
+        .paciente-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .paciente-info strong { display: block; font-size: 14px; color: #1a2e4a; }
+        .paciente-info span { font-size: 12px; color: #888; }
+
+        /* CONTATO */
+        .contato { background: #1a2e4a; padding: 70px 60px; }
+        .contato .section-title h2 { color: #fff; }
+        .contato .section-title p { color: #8fa8c8; }
+
+        .contato-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .contato-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .contato-icon { font-size: 40px; margin-bottom: 15px; }
+        .contato-card h3 { color: #fff; font-size: 18px; margin-bottom: 10px; }
+        .contato-card p { color: #8fa8c8; font-size: 14px; line-height: 1.7; }
+
+        /* FOOTER */
+        footer {
+            background: #111d2e;
+            padding: 20px 60px;
+            text-align: center;
+            color: #8fa8c8;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">
+            🏥 <span>Clínica <b style="color:#1a73e8">Vida Saúde</b></span>
+        </div>
+        <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#especialidades">Especialidades</a></li>
+            <li><a href="#medicos">Médicos</a></li>
+            <li><a href="#agendamento">Agendamento</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="#agendamento" class="btn-agendar">Agendar Consulta</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+        <div class="hero-text">
+            <h1>Cuidando da sua <span>saúde</span> com excelência</h1>
+            <p>Oferecemos atendimento médico de qualidade com profissionais especializados, tecnologia de ponta e um ambiente acolhedor para você e sua família.</p>
+            <div class="hero-buttons">
+                <a href="#agendamento" class="btn-primary">Agendar Consulta</a>
+                <a href="#especialidades" class="btn-outline">Nossas Especialidades</a>
+            </div>
+        </div>
+        <div class="hero-image">🏥</div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats">
+        <div class="stat"><h2>15+</h2><p>Anos de Experiência</p></div>
+        <div class="stat"><h2>50+</h2><p>Médicos Especialistas</p></div>
+        <div class="stat"><h2>20k+</h2><p>Pacientes Atendidos</p></div>
+        <div class="stat"><h2>98%</h2><p>Satisfação dos Pacientes</p></div>
+    </div>
+
+    <!-- ESPECIALIDADES -->
+    <section class="section" id="especialidades">
+        <div class="section-title">
+            <h2>Nossas Especialidades</h2>
+            <p>Contamos com diversas especialidades médicas para cuidar de você</p>
+        </div>
+        <div class="especialidades-grid">
+            <div class="especialidade-card">
+                <div class="especialidade-icon">❤️</div>
+                <h3>Cardiologia</h3>
+                <p>Diagnóstico e tratamento de doenças do coração e sistema cardiovascular.</p>
+            </div>
+            <div class="especialidade-card">
+                <div class="especialidade-icon">🧠</div>
+                <h3>Neurologia</h3>
+                <p>Tratamento de doenças do sistema nervoso central e periférico.</p>
+            </div>
+            <div class="especialidade-card">
+                <div class="especialidade-icon">🦴</div>
+                <h3>Ortopedia</h3>
+                <p>Cuidados com ossos, articulações, músculos e ligamentos.</p>
+            </div>
+            <div class="especialidade-card">
+                <div class="especialidade-icon">👁️</div>
+                <h3>Oftalmologia</h3>
+                <p>Diagnóstico e tratamento de doenças dos olhos e visão.</p>
+            </div>
+            <div class="especialidade-card">
+                <div class="especialidade-icon">🫁</div>
+                <h3>Pneumologia</h3>
+                <p>Tratamento de doenças respiratórias e do sistema pulmonar.</p>
+            </div>
+            <div class="especialidade-card">
+                <div class="especialidade-icon">🩺</div>
+                <h3>Clínica Geral</h3>
+                <p>Atendimento geral para diagnóstico e encaminhamento especializado.</p>
+            </div>
+            <div class="especialidade-card">
+                <div class="especialidade-icon">👶</div>
+                <h3>Pediatria</h3>
+                <p>Cuidados médicos especializados para crianças e adolescentes.</p>
+            </div>
+            <div class="especialidade-card">
+                <div class="especialidade-icon">🧬</div>
+                <h3>Dermatologia</h3>
+                <p>Diagnóstico e tratamento de doenças da pele, cabelo e unhas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MÉDICOS -->
+    <section class="section medicos" id="medicos">
+        <div class="section-title">
+            <h2>Nossa Equipe Médica</h2>
+            <p>Profissionais altamente qualificados e dedicados ao seu bem-estar</p>
+        </div>
+        <div class="medicos-grid">
+            <div class="medico-card">
+                <div class="medico-foto">👨‍⚕️</div>
+                <div class="medico-info">
+                    <h3>Dr. Carlos Mendes</h3>
+                    <div class="especialidade">Cardiologista</div>
+                    <p>Especialista em cardiologia intervencionista com mais de 20 anos de experiência.</p>
+                    <span class="medico-crm">CRM 12345-SP</span>
+                </div>
+            </div>
+            <div class="medico-card">
+                <div class="medico-foto">👩‍⚕️</div>
+                <div class="medico-info">
+                    <h3>Dra. Ana Paula Lima</h3>
+                    <div class="especialidade">Neurologista</div>
+                    <p>Especialista em neurologia clínica e doenças neurodegenerativas.</p>
+                    <span class="medico-crm">CRM 23456-SP</span>
+                </div>
+            </div>
+            <div class="medico-card">
+                <div class="medico-foto">👨‍⚕️</div>
+                <div class="medico-info">
+                    <h3>Dr. Roberto Silva</h3>
+                    <div class="especialidade">Ortopedista</div>
+                    <p>Especialista em cirurgia ortopédica e medicina esportiva.</p>
+                    <span class="medico-crm">CRM 34567-SP</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AGENDAMENTO -->
+    <section class="section agendamento" id="agendamento">
+        <div class="agendamento-container">
+            <div class="agendamento-info">
+                <h2>Agende sua Consulta</h2>
+                <p>Marque sua consulta de forma rápida e fácil. Nossa equipe está pronta para atendê-lo com todo o cuidado que você merece.</p>
+                <ul class="beneficios">
+                    <li>Confirmação imediata por e-mail</li>
+                    <li>Lembretes automáticos</li>
+                    <li>Atendimento de segunda a sábado</li>
+                    <li>Aceita todos os convênios</li>
+                    <li>Estacionamento gratuito</li>
+                </ul>
+            </div>
+            <div class="form-agendamento">
+                <h3>Formulário de Agendamento</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" placeholder="Seu nome">
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="tel" placeholder="(11) 99999-9999">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" placeholder="seu@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Especialidade</label>
+                    <select>
+                        <option>Selecione a especialidade</option>
+                        <option>Cardiologia</option>
+                        <option>Neurologia</option>
+                        <option>Ortopedia</option>
+                        <option>Oftalmologia</option>
+                        <option>Pneumologia</option>
+                        <option>Clínica Geral</option>
+                        <option>Pediatria</option>
+                        <option>Dermatologia</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Data</label>
+                        <input type="date">
+                    </div>
+                    <div class="form-group">
+                        <label>Horário</label>
+                        <select>
+                            <option>Selecione</option>
+                            <option>08:00</option>
+                            <option>09:00</option>
+                            <option>10:00</option>
+                            <option>11:00</option>
+                            <option>14:00</option>
+                            <option>15:00</option>
+                            <option>16:00</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-submit">Confirmar Agendamento</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="section depoimentos">
+        <div class="section-title">
+            <h2>O que nossos pacientes dizem</h2>
+            <p>A satisfação dos nossos pacientes é nossa maior conquista</p>
+        </div>
+        <div class="depoimentos-grid">
+            <div class="depoimento-card">
+                <div class="estrelas">★★★★★</div>
+                <p>"Atendimento excelente! Os médicos são muito atenciosos e o ambiente é muito agradável. Me senti muito bem cuidada."</p>
+                <div class="paciente">
+                    <div class="paciente-avatar">👩</div>
+                    <div class="paciente-info">
+                        <strong>Maria Fernanda</strong>
+                        <span>Paciente há 3 anos</span>
+                    </div>
+                </div>
+            </div>
+            <div class="depoimento-card">
+                <div class="estrelas">★★★★★</div>
+                <p>"Ótima clínica! Agendamento fácil, sem filas e os profissionais são muito competentes. Recomendo a todos."</p>
+                <div class="paciente">
+                    <div class="paciente-avatar">👨</div>
+                    <div class="paciente-info">
+                        <strong>João Paulo</strong>
+                        <span>Paciente há 1 ano</span>
+                    </div>
+                </div>
+            </div>
+            <div class="depoimento-card">
+                <div class="estrelas">★★★★★</div>
+                <p>"Minha família toda é atendida aqui. Desde pediatria até cardiologia, todos os médicos são excelentes!"</p>
+                <div class="paciente">
+                    <div class="paciente-avatar">👩</div>
+                    <div class="paciente-info">
+                        <strong>Sandra Oliveira</strong>
+                        <span>Paciente há 5 anos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="contato" id="contato">
+        <div class="section-title">
+            <h2>Entre em Contato</h2>
+            <p>Estamos aqui para ajudar você</p>
+        </div>
+        <div class="contato-grid">
+            <div class="contato-card">
+                <div class="contato-icon">📍</div>
+                <h3>Endereço</h3>
+                <p>Av. Paulista, 1000 - Bela Vista<br>São Paulo - SP, 01310-100</p>
+            </div>
+            <div class="contato-card">
+                <div class="contato-icon">📞</div>
+                <h3>Telefone</h3>
+                <p>(11) 3000-0000<br>(11) 99999-0000<br>WhatsApp disponível</p>
+            </div>
+            <div class="contato-card">
+                <div class="contato-icon">🕐</div>
+                <h3>Horário de Funcionamento</h3>
+                <p>Segunda a Sexta: 7h às 20h<br>Sábado: 8h às 14h<br>Domingo: Fechado</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2024 Clínica Vida Saúde. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
