@@ -11,9 +11,3 @@ Gerenciamento básico de informações médicas
 HTML5
 CSS3
 JavaScript
-🚀 Como executar
-Baixe o projeto
-Abra o arquivo consultorio_medico.html no navegador
-📌 Objetivo do projeto
-
-Projeto desenvolvido para praticar desenvolvimento web e organização de interfaces para sistemas médicos.
